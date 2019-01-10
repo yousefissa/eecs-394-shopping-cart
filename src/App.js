@@ -1,67 +1,80 @@
 import React, { Component } from 'react'
 import { products } from './static/data/products'
 import './shopping_cart.scss'
+import Shelf from './components/shelf'
+import ShoppingCart from './components/cart'
+
+// class App extends Component {
+//   render() {
+//     return (
+//       <div>
+//       <Shelf></Shelf>
+//       <shoppingCart></shoppingCart>
+//       </div>
+//     )
+//   }
+// }
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      productQuantity: 0,
+      itemsInCart: [],
+      cartTotalPrice: 0,
+      openCart: false
+    }
+    this.handleToggle = this.handleToggle.bind(this)
+    this.addProductToCart = this.addProductToCart.bind(this)
+  }
+
+  addProductToCart(product) {
+    this.setState(prevState => {
+      return {
+        productQuantity: prevState.productQuantity + 1,
+        itemsInCart: prevState.itemsInCart.concat(product),
+        cartTotalPrice: prevState.cartTotalPrice + product.price
+      }
+    })
+    this.setState({ openCart: true })
+  }
+
+removeProduct = product => {
+      this.setState(prevState => {
+      const { itemsInCart } = prevState
+      const new_price = this.state.cartTotalPrice - product.price
+      this.setState({'cartTotalPrice':new_price})
+      let new_cart = { itemsInCart: itemsInCart.filter(p => p.sku !== product.sku) }
+      if (new_cart.length == 0) {
+        this.setState({'cartTotalPrice':0})
+      }
+      return new_cart
+    })
+  }
+
+  handleToggle() {
+    this.setState({ openCart: !this.state.openCart })
+  }
+
   render() {
     return (
       <div>
-      <Shelf></Shelf>
-      <FloatCart></FloatCart>
+        <Shelf
+          addProductToCart={this.addProductToCart}
+        />
+        <ShoppingCart
+          cartTotal={{
+            productQuantity: this.state.productQuantity,
+            cartTotalPrice: this.state.cartTotalPrice
+          }}
+          isOpen={this.state.openCart}
+          handleToggle={this.handleToggle}
+          itemsInCart={this.state.itemsInCart}
+          removeProduct={this.removeProduct}
+        />
       </div>
     )
   }
-}
-
-class Item extends Component {
-  render() {
-    const { product } = this.props
-    const selected_img = require(`./static/photos/${product.sku}_1.jpg`)
-    return (
-      <div className='shelf-item'>
-      <div>
-        <img src={selected_img} alt={product.title}></img>
-        <p className='shelf-item__title'>{product.title}</p>
-        <p className='shelf-item__price'>{product.price}</p>
-      </div>
-        <div className='shelf-item__buy-btn'>Add to cart</div>
-      </div>
-    );
-  }
-}
-
-class Shelf extends Component {
-  render() {
-    const all_products = products.map(product => <Item product={product} />);
-    return (
-      <div className='shelf-container'>
-        {all_products}
-      </div>
-    );
-  }
-}
-
-class FloatCart extends React.Component{
-    state = {
-        isOpen: false
-    };
-
-    openFloatCart = () => {
-      this.setState({ isOpen: true });
-    };
-
-    closeFloatCart = () => {
-      this.setState({ isOpen: false });
-    };
-
-    render(){
-        
-        return (
-            <span onClick={() => this.openFloatCart()} className="bag bag--float-cart-closed">
-                <span className="bag__quantity"></span>
-            </span>
-        );
-    }
 }
 
 export default App

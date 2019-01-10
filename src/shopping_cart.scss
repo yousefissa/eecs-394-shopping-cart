@@ -280,6 +280,7 @@ main {
       display: inline-block;
       vertical-align: middle;
       margin-right: 15px;
+      background-image: url('./static/bag-icon.png');
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
@@ -382,6 +383,7 @@ main {
           border-radius: 50%;
           position: absolute;
           background-size: auto 100%;
+          background-image: url('./static/sprite_delete-icon.png');
           background-repeat: no-repeat;
           z-index: 2;
           cursor: pointer;
