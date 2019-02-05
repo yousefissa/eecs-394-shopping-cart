@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/yousefissa/eecs-394-shopping-cart/precache-manifest.bf2cc0ddcee2cb487cc15bbba430ddc2.js"
+  "/eecs-394-shopping-cart/precache-manifest.de8a231b7eee2227099a603fd5035878.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/yousefissa/eecs-394-shopping-cart/index.html", {
+workbox.routing.registerNavigationRoute("/eecs-394-shopping-cart/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
