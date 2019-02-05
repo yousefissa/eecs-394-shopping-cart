@@ -44,8 +44,8 @@ removeProduct = product => {
       const { itemsInCart } = prevState
       const new_price = this.state.cartTotalPrice - product.price
       this.setState({'cartTotalPrice':new_price});
-      let new_cart = { itemsInCart: itemsInCart.filter(p => p.sku !== product.sku) }
-      if (new_cart.length === 0) {
+      let new_cart = { itemsInCart: itemsInCart.filter(p => p.sku !== product.sku) };
+      if (new_cart.itemsInCart.length == 0) {
         this.setState({'cartTotalPrice':0})
       }
       return new_cart

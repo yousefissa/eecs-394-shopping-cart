@@ -13,7 +13,7 @@ class ShoppingCart extends Component {
 
     const products = this.props.itemsInCart.map(product => {
       return <CartProduct product={product} key={product.id} removeProduct={this.props.removeProduct} />
-    })
+    });
 
     return (
       <div className={`float-cart${this.props.isOpen ? ' float-cart--open' : ''}`}>
