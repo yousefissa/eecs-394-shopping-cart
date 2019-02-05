@@ -17,13 +17,13 @@ import ShoppingCart from './components/cart'
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       productQuantity: 0,
       itemsInCart: [],
       cartTotalPrice: 0,
       openCart: false
-    }
+    };
     this.handleToggle = this.handleToggle.bind(this)
     this.addProductToCart = this.addProductToCart.bind(this)
   }
@@ -35,7 +35,7 @@ class App extends Component {
         itemsInCart: prevState.itemsInCart.concat(product),
         cartTotalPrice: prevState.cartTotalPrice + product.price
       }
-    })
+    });
     this.setState({ openCart: true })
   }
 
@@ -43,14 +43,14 @@ removeProduct = product => {
       this.setState(prevState => {
       const { itemsInCart } = prevState
       const new_price = this.state.cartTotalPrice - product.price
-      this.setState({'cartTotalPrice':new_price})
+      this.setState({'cartTotalPrice':new_price});
       let new_cart = { itemsInCart: itemsInCart.filter(p => p.sku !== product.sku) }
-      if (new_cart.length == 0) {
+      if (new_cart.length === 0) {
         this.setState({'cartTotalPrice':0})
       }
       return new_cart
     })
-  }
+  };
 
   handleToggle() {
     this.setState({ openCart: !this.state.openCart })

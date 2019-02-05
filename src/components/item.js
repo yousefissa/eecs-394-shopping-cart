@@ -9,7 +9,7 @@ class Item extends Component {
       <div>
         <img src={selected_img} alt={product.title}></img>
         <p className='shelf-item__title'>{product.title}</p>
-        <p className='shelf-item__price'>{product.price}</p>
+        <p className='shelf-item__price'>${product.price}</p>
       </div>
         <div className='shelf-item__buy-btn'>Add to cart</div>
       </div>
